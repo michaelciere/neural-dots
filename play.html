@@ -1,0 +1,124 @@
+<html>                                                                           
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="{{ url_for('static', filename = 'app.js') }}"></script>
+    
+    </head>                                                                  
+  <body>
+                                                                                 
+    <span id="board">
+        
+<div id="cont"><svg class = "board", width = "374", height = "374"><rect x="0", y="365", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0010", x="8", y="365", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="365", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1020", x="81", y="365", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="365", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2030", x="154", y="365", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="365", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3040", x="227", y="365", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="365", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4050", x="300", y="365", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="365", width="8", height="8", style=fill:gray></rect>
+<rect x="0", y="292", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0111", x="8", y="292", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="292", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1121", x="81", y="292", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="292", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2131", x="154", y="292", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="292", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3141", x="227", y="292", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="292", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4151", x="300", y="292", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="292", width="8", height="8", style=fill:gray></rect>
+<rect x="0", y="219", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0212", x="8", y="219", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="219", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1222", x="81", y="219", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="219", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2232", x="154", y="219", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="219", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3242", x="227", y="219", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="219", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4252", x="300", y="219", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="219", width="8", height="8", style=fill:gray></rect>
+<rect x="0", y="146", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0313", x="8", y="146", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="146", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1323", x="81", y="146", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="146", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2333", x="154", y="146", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="146", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3343", x="227", y="146", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="146", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4353", x="300", y="146", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="146", width="8", height="8", style=fill:gray></rect>
+<rect x="0", y="73", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0414", x="8", y="73", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="73", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1424", x="81", y="73", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="73", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2434", x="154", y="73", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="73", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3444", x="227", y="73", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="73", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4454", x="300", y="73", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="73", width="8", height="8", style=fill:gray></rect>
+<rect x="0", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0515", x="8", y="0", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="73", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="1525", x="81", y="0", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="146", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="2535", x="154", y="0", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="219", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="3545", x="227", y="0", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="292", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="4555", x="300", y="0", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>
+<rect x="365", y="0", width="8", height="8", style=fill:gray></rect>
+<rect class="line", id="0001", x="0", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="1011", x="73", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="2021", x="146", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="3031", x="219", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="4041", x="292", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="5051", x="365", y="300", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="0102", x="0", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="1112", x="73", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="2122", x="146", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="3132", x="219", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="4142", x="292", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="5152", x="365", y="227", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="0203", x="0", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="1213", x="73", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="2223", x="146", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="3233", x="219", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="4243", x="292", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="5253", x="365", y="154", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="0304", x="0", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="1314", x="73", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="2324", x="146", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="3334", x="219", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="4344", x="292", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="5354", x="365", y="81", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="0405", x="0", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="1415", x="73", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="2425", x="146", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="3435", x="219", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="4445", x="292", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>
+<rect class="line", id="5455", x="365", y="8", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect></svg></div>
+
+    </span>                               
+    
+    <p id = "score", style="font-size:50">0-0</p>
+    <p id="tomove", style="font-size:25"></p>    
+      
+      <div class="start-screen" style="font-size:20">
+      <div class="player-select">Play as</div>
+      <form id = "start-form", action="">
+      <input type="radio" name="player" id="p0" value="0" checked /> Red (player 1)
+      <input type="radio" name="player" id="p1" value="1"/> Blue (player 2)
+      <button id="startBtn" onsubmit="startGame();">Start</button>
+      </form>
+      </div>
+                                                                                 
+                                                                                 
+  </body>                                                                        
+</html>   

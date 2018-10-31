@@ -1,0 +1,20 @@
+$(document).ready(function() {
+    setInterval("ajaxd()",5000); // call every 5 seconds
+
+    $('svg.board').find('> rect').click(lineClick);
+
+});
+
+
+
+function lineClick(){
+    $.post("/play", { move: $(this).attr("id") } );
+    
+    //alert("Line clicked from class: " + $(this).attr("id"));
+}
+
+function ajaxd() {
+    //reload board
+    $("#board").load("/play", function() {  alert( "Load was performed." ); });
+
+}
