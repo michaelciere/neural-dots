@@ -20,12 +20,15 @@ engine = Engine()
 @app.route('/')
 def play():
     global state
+    global engine
+    engine = Engine()
     state = State()
     return render_template('play.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def move():
     global state
+    global engine
     move = request.form['move']
     if move[0] == "c":
         # return computer move

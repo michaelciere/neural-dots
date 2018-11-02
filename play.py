@@ -75,14 +75,14 @@ class Engine:
     
     def rollout(self, starting_state):
         
-        state = copy.deepcopy(starting_state)
+        state_ = copy.deepcopy(starting_state)
 
-        while not state.board.isGameOver():
-            move = self.make_move(state)
-            state.board.play(move)
+        while not state_.board.isGameOver():
+            move = self.make_move(state_)
+            state_.board.play(move)
 
         # who won?
-        if state.board.scores[0] > state.board.scores[1]:
+        if state_.board.scores[0] > state_.board.scores[1]:
             result = 0
         else:
             result = 1
@@ -97,6 +97,7 @@ class Engine:
     
     def treesearch(self, starting_state, seconds=10):
 
+
         if seconds == 0:
             return self.make_move(starting_state), 0.0
         
@@ -108,18 +109,18 @@ class Engine:
 
         max_depth = 1000
         num_rollouts = 1
-        def traverse(node, state, depth=0):
+        def traverse(node, state_, depth=0):
             if node['visit_count'] == 0:
                 # first visit, set player
-                node['player'] = state.board.player
+                node['player'] = state_.board.player
                 
             node['visit_count'] += 1
             
-            ser = state.serialize()
+            ser = state_.serialize()
             edges = self.edges(ser)
             # check if game is over
             if len(edges) == 0:
-                scores = state.board.scores
+                scores = state_.board.scores
                 if scores[0] > scores[1]:
                     value = 0.0
                 elif scores[0] == scores[1]:
@@ -145,7 +146,7 @@ class Engine:
                                                   'children': {}}
                         
                 # evaluate leaf
-                value = float(self.rollout(state))
+                value = float(self.rollout(state_))
 
                 action_value = (node['visit_count'] - 1.) \
                             * node['action_value'] \
@@ -172,11 +173,11 @@ class Engine:
                          for i, child in node['children'].iteritems()}
 
                 move = max(probs, key=probs.get)
-                move_ = state.unrotate_move((move/10, move%10))
-                state.board.play(move_)
+                move_ = state_.unrotate_move((move/10, move%10))
+                state_.board.play(move_)
 
                 value = traverse(node['children'][move],
-                                 state, depth+1)
+                                 state_, depth+1)
                     
                 action_value = (node['visit_count'] - 1.) \
                             * node['action_value'] \
@@ -188,11 +189,11 @@ class Engine:
 
         start = time.clock()
         while (time.clock() - start) < seconds:
-            state = copy.deepcopy(starting_state)
-            traverse(root, state)
+            state_ = copy.deepcopy(starting_state)
+            traverse(root, state_)
         
         def transform_move(move):
-            return state.unrotate_move((move/10, move%10))
+            return starting_state.unrotate_move((move/10, move%10))
             
         # print {transform_move(child_k): child_v['visit_count']
         #        for child_k, child_v in root['children'].iteritems()
