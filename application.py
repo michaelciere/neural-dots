@@ -21,7 +21,6 @@ engine = Engine()
 def play():
     global state
     global engine
-    engine = Engine()
     state = State()
     return render_template('play.html')
 
