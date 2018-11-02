@@ -2,7 +2,8 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="{{ url_for('static', filename = 'app.js') }}"></script>
-    
+
+      <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"> -->
     </head>                                                                  
   <body>
                                                                                  
@@ -107,18 +108,38 @@
 
     </span>                               
     
-    <p id = "score", style="font-size:50">0-0</p>
-    <p id="tomove", style="font-size:25"></p>    
+
+    <div>
+
+      <p id = "score", style="font-size:50">0-0</p>
+      <p id="tomove", style="font-size:25"></p>    
       
       <div class='start-screen' style="font-size:20">
-      <div class="player-select">Play as</div>
-      <form action="">
-          <input type="radio" name="player" id="p0" value="0" checked /> Red (player 1)
-      <input type="radio" name="player" id="p1" value="1"/> Blue (player 2)
-      </form>
-      <button id="startBtn">Start</button>
+	<div class="player-select">Play as</div>
+	<form id="start-form" action="", style = "font-size:25">
+	  <div>
+            <input type="radio" name="player" id="p0" value="0" checked /> Red (player 1)
+	    <input type="radio" name="player" id="p1" value="1"/> Blue (player 2)
+	  </div>
+
+	  <!-- Let user set engine move time -->
+	  <!-- <div id="input_div"> -->
+	  <!--   <input type="text" size="25" value="0" id="count"> -->
+	  <!--   <input type="button" value="-" id="moins" onclick="compTimeMinus()"> -->
+	  <!--   <input type="button" value="+" id="plus" onclick="compTimePlus()"> -->
+	  <!-- </div> -->
+	  
+	  <div>
+	    <input type="submit" value="start", style = "font-size:25">
+	  </div>
+	</form>
+
       </div>
-                                                                                 
+      
+     </div>
+
+
+      
                                                                                  
   </body>                                                                        
 </html>   

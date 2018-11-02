@@ -41,11 +41,16 @@ def load_model():
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
+    
+    loaded_model._make_predict_function()
+    
     # load weights into new model
     loaded_model.load_weights("model.h5")
     print("Loaded model from disk")
 
     return loaded_model
+
+
 
 
 class Engine:
@@ -91,6 +96,10 @@ class Engine:
 
     
     def treesearch(self, starting_state, seconds=10):
+
+        if seconds == 0:
+            return self.make_move(starting_state), 0.0
+        
         # do a Monte Carlo Tree Search
         ser = starting_state.serialize()
         root = {'player': starting_state.board.player,
@@ -123,7 +132,7 @@ class Engine:
 
             elif len(node['children']) == 0:
                 if depth < max_depth \
-                and node['visit_count'] > 3:
+                and (node['visit_count'] > 3 or len(node['path'])==0):
                     # expand leaf
                     move_probs = self.model.predict(ser[np.newaxis,...]).ravel()
                     node['prior'] = {edge: move_probs[edge]
@@ -182,15 +191,15 @@ class Engine:
         while (time.clock() - start) < seconds:
             state = copy.deepcopy(starting_state)
             traverse(root, state)
-
+        
         def transform_move(move):
             return state.unrotate_move((move/10, move%10))
             
-        print {transform_move(child_k): child_v['visit_count']
-               for child_k, child_v in root['children'].iteritems()
-               if child_v['visit_count'] > 0}
+        # print {transform_move(child_k): child_v['visit_count']
+        #        for child_k, child_v in root['children'].iteritems()
+        #        if child_v['visit_count'] > 0}
         
-        print root['prior']
+        # print root['prior']
         
         visit_counts = {k: child['visit_count']
                         for k, child in root['children'].iteritems()}

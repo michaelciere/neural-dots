@@ -1,10 +1,12 @@
 var player = 0;
 var player_to_move = 0;
 var moves_played = new Set();
-var comp = false;
+var comp = true;
+var comp_seconds = 0
 var started = false;
 
 var scores = [0,0];
+var last_move;
 
 $(document).ready(function() {
     
@@ -12,31 +14,50 @@ $(document).ready(function() {
     $('p#score').hide();
     $('p#start').show();
 
-    ('#start-form').on(submit, function() {
+    $('#start-form').submit( function(e) {
+	e.preventDefault();
 	$('p#tomove').show();
 	$('p#score').show();
 	$('.start-screen').hide();
 	// check which player was selected
 	player = parseInt($('input[name=player]:checked').val());
-        
-	started = true;
-	
-    // 	alert('started');
 
-	return false;
+	started = true;
+
+	startGame();
+	
+    	return false;
 
     });
     
-    setInterval("ajaxd()",1000); // call every 1 seconds                         
     $(document).on('click', 'rect.line', lineClick);
-    //$('svg.board').find('> rect.line').click(lineClick);
-    
+        
     $('p#tomove').text("Player " + player_to_move + " to move")
+    
     
 });
 
 
+function compTimePlus(){
+    comp_seconds++;
+    document.getElementById("count").value = comp_seconds;
+}
 
+function compTimeMinus(){
+    if (comp_seconds > 0) {
+	comp_seconds--;
+	document.getElementById("count").value = comp_seconds;
+    }
+}
+
+function startGame() {
+
+    comp_seconds = document.getElementById("count").value;
+    if (player == 1 && comp == true) {
+	playCompMove();
+    }
+    
+};
 
 function squareLines(x,y) {
     lines = [[x, y, x+1, y],
@@ -115,9 +136,9 @@ function capturedSquares(move) {
 
 function colorBox(box, plyr) {
     if (plyr == 0) {
-        colour = "red";
+        colour = "red; opacity:0.5";
     } else {
-        colour = "blue";
+        colour = "blue; opacity:0.5";
     }
     x_ = 8 + parseInt(box[0]) * (65+8);
     y_ = 8 + (4 - parseInt(box[1])) * (65+8);
@@ -126,69 +147,84 @@ function colorBox(box, plyr) {
     $("#cont").html($("#cont").html());
 };
 
+function playMove(move) {
+    moves_played.add(move);
+    $.post("/", {'move': move});
+    
+    $(('#'+last_move)).attr('style', 'fill:black');
+    $(('#'+move)).attr('style', 'fill:red');
+    last_move = move;
+
+    var squares = capturedSquares(move);
+    $.each(squares, function(i,sq) {
+        colorBox(sq, player_to_move);
+    });
+    
+    if (squares.length > 0) {
+        scores[player_to_move] = scores[player_to_move] + squares.length
+	$('p#score').text(scores[0] + "-" + scores[1]);
+    };
+    
+    if (scores[0] + scores[1] == 25) {
+        if (scores[player] > 12.5) {
+            $('p#tomove').text("You won!")
+        } else {
+            $('p#tomove').text("You lost.")
+        }
+    } else {
+	if (squares.length == 0) {
+	    switchPlayer();
+	    if (player_to_move != player) {
+		playCompMove();
+	    } // else: player to move, wait
+	} else {
+	    if (player_to_move != player) {
+		// still comp's turn, get another move
+		playCompMove();
+	    } // else: still player's turn, wait for next move
+	}
+    }
+
+
+};
+
+
+function playCompMove(){
+    var sec = 0;
+    if (moves_played.size > 25) {
+	sec = 4;
+    }
+    comp_move = $.post("/", {'move': ("c" + sec)}, function( data ) {
+	comp_move = data;
+	playMove(comp_move);
+    });
+};
+
+
 function lineClick(){
     
     //alert("Move: " + $(this).attr("id"));
     var move = $(this).attr("id");
-    
-    if (moves_played.has(move) || !(started)) { //|| player_to_move!=player) {
-        //alert('Invalid move!');
-        
-        
-    } else {
-        moves_played.add(move);
-        // change color of line
-        
-        $(this).attr('style', 'fill:black');
-        
-        var squares = capturedSquares(move);
-        
-        $.each(squares, function(i,sq) {
-            colorBox(sq, player_to_move);
-        });
-        
-        if (squares.length == 0) {
-            switchPlayer();
-        } else {
-            scores[player_to_move] = scores[player_to_move] + squares.length
-        };
-        
-        $('p#score').text(scores[0] + "-" + scores[1]);
-        
-        if (scores[0] + scores[1] == 25) {
-            if (scores[player] > 12.5) {
-                $('p#tomove').text("You won!")
-            } else {
-                $('p#tomove').text("You lost.")
-            }
-        }
 
-        $.post("/", {move: move});
-        
+    if (moves_played.has(move) || (!(started)) || (player_to_move!=player)) {
+        //alert('Invalid move!');        
+    } else {
+	playMove(move);
     }
-        
-}
+
+length}
 
 function switchPlayer() {
     player_to_move = 1-player_to_move;
-    if (player_to_move == player && comp == true) {
+    $('p#tomove').text("Player " + player_to_move + " to move")
+    if (player_to_move != player && comp == true) {
         $('svg.board').find('> rect.line').css("cursor", "auto")
-        $('p#tomove').text("Player " + player_to_move + " to move")
     } else {
-        $('p#tomove').text("Player " + player_to_move + " to move")
         $('svg.board').find('> rect.line').css("cursor", "pointer")
     }
     
 }
 
-function ajaxd() {                                                                                                                                                   
-    //reload board  
-    
-    $.get( "/", function( data ) {
-        var move = data;
-        alert( "Load was performed: " + move);
-    });                                               
-} 
 
 
 
