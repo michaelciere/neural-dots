@@ -32,6 +32,7 @@ def move():
 #        comp_move = engine.make_move(state)
         seconds = float(move[1:])
         comp_move, _ = engine.treesearch(state, seconds=seconds)
+        state.board.play(comp_move)
         move_str = '%d%d%d%d' % \
                    (comp_move[0][0], comp_move[0][1],
                     comp_move[1][0], comp_move[1][1])

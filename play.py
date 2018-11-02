@@ -109,7 +109,6 @@ class Engine:
         max_depth = 1000
         num_rollouts = 1
         def traverse(node, state, depth=0):
-
             if node['visit_count'] == 0:
                 # first visit, set player
                 node['player'] = state.board.player

@@ -27,7 +27,6 @@ $(document).ready(function() {
 	startGame();
 	
     	return false;
-
     });
     
     $(document).on('click', 'rect.line', lineClick);
@@ -51,12 +50,9 @@ function compTimeMinus(){
 }
 
 function startGame() {
-
-    comp_seconds = document.getElementById("count").value;
     if (player == 1 && comp == true) {
 	playCompMove();
     }
-    
 };
 
 function squareLines(x,y) {
