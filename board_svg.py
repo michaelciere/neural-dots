@@ -1,21 +1,48 @@
-from state import State
+#!/usr/bin/env python
 
+from state import State
 
 def render_board(state):
     # render board as html
 
+    state_str = ''.join(['%s%s%s%s' % (line[0][0], line[0][1], line[1][0], line[1][1])
+     for line in state.board.lines])
+    
     def dot(x,y):
         dot = '<rect x="%d", y="%d", width="8", height="8", style=fill:gray></rect>' \
               % (x, y)
         return dot
-    
-    def hline(x,y, id_str):
-        hline_str = '<rect class="line", id="%s", x="%d", y="%d", width="65", height="8", style="fill:lightblue; cursor:pointer"></rect>' % (id_str, x, y)
-        return hline_str
 
-    def vline(x,y, id_str):
-        vline_str = '<rect class="line", id="%s", x="%d", y="%d", width="8", height="65", style="fill:lightblue; cursor:pointer"></rect>' % (id_str, x, y)
-        return vline_str
+    
+    def hline(x,y, id_str, played=False, to_move=True):
+        state_str_new = state_str + id_str
+        if (not played) and to_move:
+            line_str = '<a href= "{{url_for("play", player=player,state=%s) }}">' % state_str_new
+        else:
+            line_str = ''
+        
+        line_str += '<rect class="line", x="%d", y="%d", width="65", height="8", style="fill:lightblue"></rect>' % (x, y)
+
+        if (not played) and to_move:
+            line_str += '</a>'
+        
+        return line_str
+
+    
+    def vline(x,y, id_str, played=False, to_move=True):
+        state_str_new = state_str + id_str
+        if (not played) and to_move:
+            line_str = '<a href= "{{url_for("play", player=player,state=%s) }}">' % state_str_new
+        else:
+            line_str = ''
+
+        line_str += '<rect class="line", x="%d", y="%d", width="8", height="65", style="fill:lightblue"></rect>' % (x, y)
+
+        if (not played) and to_move:
+            line_str += '</a>'
+
+        return line_str
+    
     
     height, width = 5, 5
     
@@ -49,4 +76,7 @@ def render_board(state):
 if __name__ == '__main__':
 
     state = State()
+
+    move = ((2,2),(3,2))
+    state.board.play(move)
     print render_board(state)
