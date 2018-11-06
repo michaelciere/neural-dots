@@ -1,6 +1,6 @@
 # Neural Dots - A neural network that plays dots and boxes
 
-This repository contains all the scripts that were used to create the dots-and-boxes web app av[available here](http://dots-and-boxes.eu-central-1.elasticbeanstalk.com/).
+This repository contains all the scripts that were used to create the dots-and-boxes web app [available here](http://dots-and-boxes.eu-central-1.elasticbeanstalk.com/).
 
 If this is no longer online by the time you are reading this, you can run the app locally by running
 ```
