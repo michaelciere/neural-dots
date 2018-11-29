@@ -12,9 +12,9 @@ and then pointing your web browser at 127.0.0.1:5000
 
 # How it works
 
-A convolutional neural net was trained to predict the moves played by experts in 5x5 dots-and-boxes fames played on [www.littlegolem.net](www.littlegolem.net), where 'expert' is defined as 'anyone who ever played in the first league of the championship'. There are roughly 800,000 positions in the database.
+A convolutional neural net was trained to predict the moves played by experts in 5x5 dots-and-boxes games played on [www.littlegolem.net](www.littlegolem.net), where 'expert' is defined as 'anyone who ever played in the first league of the championship'. There are roughly 800,000 positions in the database.
 
-Unlike chess or go, the moves (i.e. the lines between dots) are not aranged in a normal grid, but in a diagonal grid. Since a convolutional neural net needs a regular grid of inputs, the diagonal move grids were transformed by first rotating 45 degrees and then padding the corners with zeros.
+Unlike chess or Go, the moves (i.e. the lines between dots) are not arranged in a normal grid, but in a diagonal grid. Since a convolutional neural net needs a rectangular grid of inputs, the diagonal move grids were transformed by first rotating 45 degrees and then padding the corners with zeros. Possibly there is a better way that requires less zero-padding, but this works well enough, at least for 5x5 games.
 
 The result is a neural net that takes a position as input and then outputs a probability distribution over all legal moves. During the first 25 moves of a game, the bot simply draws a move from this distribution. After move 25, it uses a short phase of Monte Carlo Tree Search.
 
