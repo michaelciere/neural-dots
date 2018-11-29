@@ -16,7 +16,7 @@ A convolutional neural net was trained to predict the moves played by experts in
 
 Unlike chess or Go, the moves (i.e. the lines between dots) are not arranged in a normal grid, but in a diagonal grid. Since a convolutional neural net needs a rectangular grid of inputs, the diagonal move grids were transformed by first rotating 45 degrees and then padding the corners with zeros. Possibly there is a better way that requires less zero-padding, but this works well enough, at least for 5x5 games.
 
-The result is a neural net that takes a position as input and then outputs a probability distribution over all legal moves. During the first 25 moves of a game, the bot simply draws a move from this distribution. After move 25, it uses a short phase of Monte Carlo Tree Search.
+The result is a neural net that takes a position as input and then outputs a probability distribution over all legal moves. During the first 25 moves of a game, the bot simply draws a move from this distribution. After move 25, it uses a short phase of Monte Carlo Tree Search. The exact MCTS algorithm is the same one that was used for AlphaGo, described on page 7 of [the Nature paper](https://storage.googleapis.com/deepmind-media/alphago/AlphaGoNaturePaper.pdf).
 
 
 # I keep losing. How do I beat this thing?
